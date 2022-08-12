@@ -36,14 +36,20 @@ class LinkedList{
             tail = nullptr;
         }
 
-        int len(){return length;}
-        void display();
-        void insertAtBeg(T element);
+        int len(){return length;}   //returns length
+        void display();     //prints entire list;
+
+        //insertion operations
+        void insertAtBeg(T element);    
         void insertAtEnd(T element);
         void insertAtPos(T element,int position);
-        int search(T element);
+
+        int search(T element);  //searching an element
+
+        //deletion operations
         void deleteFromBeg();
         void deleteFromEnd();
+        void deleteAValue(T val);
 
 };
 

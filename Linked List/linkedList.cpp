@@ -127,6 +127,15 @@ void LinkedList<T>::deleteFromBeg(){
         std::cout << "List is Empty" << "\n";
         return;
     }
+    
+    if(length == 1){
+        delete head;
+        delete tail;
+        head = nullptr;
+        tail = nullptr;
+        this->length--;
+        return;
+    }
         
     Node<T> *temp = head;   //save the current head node pointer, so it can be deleted
     head = head->next;      //make the next node as new head
@@ -136,7 +145,8 @@ void LinkedList<T>::deleteFromBeg(){
 }
 
 //Delete the element at End
-//T(n) = O(1)
+//Here tail pointer won't be useful;
+//T(n) = O(n)
 template<class T>
 void LinkedList<T>::deleteFromEnd(){
 
@@ -146,6 +156,15 @@ void LinkedList<T>::deleteFromEnd(){
         return;
     }
         
+    if(length == 1){
+        delete head;
+        delete tail;
+        head = nullptr;
+        tail = nullptr;
+        this->length--;
+        return;
+    }
+
     Node<T> *temp = tail;   
     Node<T> *current = head;
     Node<T> *prev = head;   //we have to keep track of previous node
@@ -160,6 +179,47 @@ void LinkedList<T>::deleteFromEnd(){
     //set previous node of last node as tail and make it point to null
     prev->next = nullptr;
     tail = prev;
+    this->length--;
+    delete current; //free the memory allocated to the pointer
+
+}
+
+//Delete a node having a particular value(val)
+//A case of delete from middle
+//T(n) = O(n) - worst case
+template<class T>
+void LinkedList<T>::deleteAValue(T val){
+
+    //if list is empty, deletion is not possible
+    if(head == nullptr){
+        std::cout << "List is Empty" << "\n";
+        return;
+    }
+
+    if(head->value == val)
+        this->deleteFromBeg();
+
+    Node<T> *temp = tail;   
+    Node<T> *current = head;
+    Node<T> *prev = head;   //we have to keep track of previous node
+
+    //traverse until the node with given value is found
+    while (current->next != nullptr && current->value !=val)
+    {
+        prev = current;
+        current = current->next;
+    }
+    
+    //if node is last then update the tail pointer
+    if(current->value != val){
+        std::cout << "Element not found" << "\n";
+        return;
+    }
+
+    if(current == tail)
+        tail = prev;
+    
+    prev->next = current->next;
     this->length--;
     delete current; //free the memory allocated to the pointer
 
@@ -181,6 +241,7 @@ int main(){
 
     ll1.deleteFromBeg();
     ll1.deleteFromEnd();
+    ll1.deleteAValue(50);
     ll1.display();
     std::cout << "Length of the list:" << ll1.len() << "\n";
 
