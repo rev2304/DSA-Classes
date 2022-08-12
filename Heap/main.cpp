@@ -11,7 +11,7 @@ int main(){
 
     h1.display();
 
-    h1.insert();
+    h1.insert(12);
 
     return 0;
 
