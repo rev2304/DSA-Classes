@@ -41,6 +41,9 @@ class LinkedList{
         void insertAtBeg(T element);
         void insertAtEnd(T element);
         void insertAtPos(T element,int position);
+        int search(T element);
+        void deleteFromBeg();
+        void deleteFromEnd();
 
 };
 
