@@ -5,7 +5,7 @@
 #include<iostream>
 
 template<class T>
-class Node{
+class Node{ 
 
     public:
         T value = 0;
